@@ -40,8 +40,8 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
       - name: Upload artifact
         run: scp -r build raspberry:~/dataiku/frontend
-#      - name: Relaunch Docker containers
-#        run: ssh raspberry 'docker-compose -f ~/dataiku/docker-compose.yml up --build -d'
-#      - name: Clean up
-#        if: always()
-#        run: rm -rf ~/.ssh/
+      - name: Relaunch Docker containers
+        run: ssh raspberry 'docker-compose -f ~/dataiku/docker-compose.yml up --build -d'
+      - name: Clean up
+        if: always()
+        run: rm -rf ~/.ssh/
