@@ -8,6 +8,7 @@ jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
     env:
+      REACT_APP_API_URL: https://api.millennium-falcon.raspberry78.me
       DISABLE_ESLINT_PLUGIN: true
 
     steps:

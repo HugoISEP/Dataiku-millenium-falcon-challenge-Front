@@ -7,7 +7,6 @@ async function api<T>(path: string, method: Method, body?: any): Promise<T> {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
-
     const res = await fetch(`${API_URL}${path}`, {
         method,
         headers,
