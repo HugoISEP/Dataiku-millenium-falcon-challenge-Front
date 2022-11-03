@@ -1,0 +1,48 @@
+name: React app CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-test-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: yarn --production
+      - name: Build the app
+        run: yarn build --production
+      - name: Test the app
+        run: yarn test
+#      - name: Configure SSH communication
+#        run: |
+#          mkdir -p ~/.ssh/
+#          echo "$SSH_KEY" > ~/.ssh/raspberry.key
+#          chmod 600 ~/.ssh/raspberry.key
+#          cat >>~/.ssh/config <<END
+#          Host raspberry
+#            HostName $SSH_HOST
+#            User $SSH_USER
+#            IdentityFile ~/.ssh/raspberry.key
+#            StrictHostKeyChecking no
+#          END
+#        env:
+#          SSH_USER: ${{ secrets.SSH_USER }}
+#          SSH_KEY: ${{ secrets.SSH_KEY }}
+#          SSH_HOST: ${{ secrets.SSH_HOST }}
+#      - name: Upload artifact
+#        run: |
+#          scp  raspberry:~/dataiku/backend
+#          scp  raspberry:~/dataiku/backend/app.jar
+#      - name: Relaunch Docker containers
+#        run: ssh raspberry 'docker-compose -f ~/dataiku/docker-compose.yml up --build -d'
+#      - name: Clean up
+#        if: always()
+#        run: rm -rf ~/.ssh/
