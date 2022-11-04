@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 import {EmpireInformation} from "../types/empireInformation";
 
 type Props = {
@@ -8,12 +9,20 @@ type Props = {
 
 function DragAndDropComponent({setEmpireInformation}: Props) {
 
+    function isFileContentCorrect(empireInformationFile: EmpireInformation): boolean {
+        if (empireInformationFile.countdown && empireInformationFile.countdown > -1 && empireInformationFile.bounty_hunters) {
+            return empireInformationFile.bounty_hunters.filter(hunters => !hunters.planet || hunters.day < 0).length === 0;
+
+        }
+        return false;
+    }
+
     function convertFileToEmpireInformation(fileContent: any) {
         const empireInformationFile: EmpireInformation = fileContent;
-        if (empireInformationFile.countdown && empireInformationFile.bounty_hunters) {
+        if (isFileContentCorrect(empireInformationFile)) {
             setEmpireInformation(empireInformationFile);
         } else {
-            // send Error message
+            toast.error("Bad file content")
         }
     }
 
@@ -27,7 +36,7 @@ function DragAndDropComponent({setEmpireInformation}: Props) {
             }
         }
         fileReader.onerror = () => {
-            // send Error message
+            toast.error("Error when loading file content")
         }
     }
 

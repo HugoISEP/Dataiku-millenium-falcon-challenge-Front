@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import toast, { Toaster } from "react-hot-toast";
 import {EmpireInformation} from "./types/empireInformation";
 import postMillenniumFalconOdds from "./api /MillenniumFalconApi";
 import DragAndDropComponent from "./components/DragAndDropComponent";
@@ -11,11 +12,19 @@ function App() {
         if (empireInformation) {
             postMillenniumFalconOdds(empireInformation).then(oddsResult => {
                 setOdds(oddsResult);
-            })
+            }).catch(error => toast.error(`Error when getting odds: ${error.message}`))
         }
     }, [empireInformation])
 
     return <div className="bg-[url('/public/images/death-star.jpeg')] h-screen flex flex-col">
+        <Toaster
+            toastOptions={{
+                style: {
+                    color: "white",
+                    background: "#4A4F54",
+                },
+            }}
+        />
         <h1 className="text-5xl font-bold underline text-white text-center pt-5">Millennium Falcon Challenge</h1>
         <div className="flex pt-10 min-h-[24rem]">
             <div className="flex-1 h-full">
@@ -32,5 +41,4 @@ function App() {
         </div>
     </div>;
 }
-
 export default App;
