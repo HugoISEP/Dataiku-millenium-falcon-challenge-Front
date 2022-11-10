@@ -1,6 +1,5 @@
 import React from "react";
-import {act, render, screen} from "@testing-library/react";
-import toast from "react-hot-toast";
+import {render, screen} from "@testing-library/react";
 import App from "./App";
 
 
@@ -22,18 +21,6 @@ describe("Default state of App", () => {
     test("No result on the page", () => {
         const titleElement = screen.queryByText(/(100|[0-9]{1,2})\\s%/i);
         expect(titleElement).not.toBeInTheDocument();
-    });
-})
-
-describe("Test message toaster", () => {
-    test("Error message", async () => {
-        render(<App  />);
-        act(() => {
-            toast.error("Yo");
-        });
-
-        screen.findByText(/Yo/i);
-        // expect(test).toBeInTheDocument()
     });
 })
 
