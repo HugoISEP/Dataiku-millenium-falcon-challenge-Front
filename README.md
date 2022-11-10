@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Dataiku challenge: C3PO
+The project was built with [React](https://reactjs.org/)
+To ensure code quality, the [prettier](https://prettier.io/) and [eslint](https://eslint.org/) tools were configured from the Airbnb model.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**The project is accessible at this url: https://millennium-falcon.raspberry78.me/**
 
 ## Available Scripts
 
