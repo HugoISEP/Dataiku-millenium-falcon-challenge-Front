@@ -1,5 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import {act, render, screen} from "@testing-library/react";
+import toast from "react-hot-toast";
 import App from "./App";
 
 
@@ -23,4 +24,17 @@ describe("Default state of App", () => {
         expect(titleElement).not.toBeInTheDocument();
     });
 })
+
+describe("Test message toaster", () => {
+    test("Error message", async () => {
+        render(<App  />);
+        act(() => {
+            toast.error("Yo");
+        });
+
+        screen.findByText(/Yo/i);
+        // expect(test).toBeInTheDocument()
+    });
+})
+
 

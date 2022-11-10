@@ -1,13 +1,12 @@
 import React from "react";
 import toast from "react-hot-toast";
-import {EmpireInformation} from "../types/empireInformation";
+import {EmpireInformation} from "../../types/empireInformation";
 
 type Props = {
-    // eslint-disable-next-line no-unused-vars
-    setEmpireInformation: (empireInformation: EmpireInformation) => void
+    setEmpireInformation: Function
 }
 
-function DragAndDropComponent({setEmpireInformation}: Props) {
+function FileInputComponent({setEmpireInformation}: Props) {
 
     function isFileContentCorrect(empireInformationFile: EmpireInformation): boolean {
         if (empireInformationFile.countdown && empireInformationFile.countdown > -1 && empireInformationFile.bounty_hunters) {
@@ -57,4 +56,4 @@ function DragAndDropComponent({setEmpireInformation}: Props) {
         </label>
     </div>
 }
-export default DragAndDropComponent;
+export default FileInputComponent;
